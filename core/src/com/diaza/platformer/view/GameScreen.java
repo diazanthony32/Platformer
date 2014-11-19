@@ -20,8 +20,10 @@ public class GameScreen implements Screen{
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
 
-        //creates a camera with a width of 14*14 units
+        //creates a camera with a width and length of 14*14 units
         camera = new OrthographicCamera(14f, 14f);
+
+        camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
 
     }
 
