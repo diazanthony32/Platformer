@@ -23,6 +23,7 @@ public class GameScreen implements Screen{
         //creates a camera with a width and length of 14*14 units
         camera = new OrthographicCamera(14f, 14f);
 
+        //changes the position of the camera to align with the bottom left corner of screen
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
 
     }
