@@ -1,5 +1,6 @@
 package com.diaza.platformer.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -20,8 +21,14 @@ public class GameScreen implements Screen{
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
 
-        //creates a camera with a width and length of 14*14 units
-        camera = new OrthographicCamera(14f, 14f);
+        //gets the width of the window
+        float width = Gdx.graphics.getWidth();
+
+        //gets the height of the window
+        float height = Gdx.graphics.getHeight();
+
+        //creates a camera with a width and length of 14*14 units with the proper height and width alignment
+        camera = new OrthographicCamera(14f, 14f * (height/width));
 
         //changes the position of the camera to align with the bottom left corner of screen
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
