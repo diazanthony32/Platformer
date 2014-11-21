@@ -2,6 +2,7 @@ package com.diaza.platformer.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -40,6 +41,12 @@ public class GameScreen implements Screen{
     @Override
     public void render(float delta) {
 
+        //setting the color of the background
+        Gdx.gl.glClearColor(0.71f,0.94f,0.98f,1f);
+
+        //clearing the game screen and setting it to our color
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         //when camera position changes it updates
         camera.update();
 
@@ -51,9 +58,18 @@ public class GameScreen implements Screen{
 
     }
 
+    //runs every time window is re-sized
     @Override
     public void resize(int width, int height) {
 
+        //sets the width of the camera to the correct size
+        camera.viewportWidth = 14f;
+
+        //sets the correct height of the camera to the correct size1
+        camera.viewportHeight = 14f * height / width;
+
+        //updates the camera
+        camera.update();
     }
 
     @Override
