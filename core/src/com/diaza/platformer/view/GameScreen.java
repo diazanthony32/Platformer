@@ -4,15 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.diaza.platformer.controller.Player;
 
 public class GameScreen implements Screen{
 
     public TiledMap map;
     public OrthogonalTiledMapRenderer renderer;
     public OrthographicCamera camera;
+
+    public Batch spriteBatch;
+    public Player player;
 
     public GameScreen() {
 
@@ -34,6 +40,12 @@ public class GameScreen implements Screen{
         //changes the position of the camera to align with the bottom left corner of screen
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0f);
 
+        //creates a new batch of sprites
+        spriteBatch = renderer.getSpriteBatch();
+
+        //makes a new player
+        player = new Player();
+
     }
 
 
@@ -42,7 +54,7 @@ public class GameScreen implements Screen{
     public void render(float delta) {
 
         //setting the color of the background
-        Gdx.gl.glClearColor(0.71f,0.94f,0.98f,1f);
+        Gdx.gl.glClearColor(0.80f,0.95f,1.00f,1f);
 
         //clearing the game screen and setting it to our color
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -55,6 +67,13 @@ public class GameScreen implements Screen{
 
         //renders the render
         renderer.render();
+
+        //updates the character position
+        player.update(delta);
+
+        spriteBatch.begin();
+        player.draw(spriteBatch);
+        spriteBatch.end();
 
     }
 
@@ -70,6 +89,7 @@ public class GameScreen implements Screen{
 
         //updates the camera
         camera.update();
+
     }
 
     @Override
