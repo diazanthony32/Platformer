@@ -18,7 +18,7 @@ public class Player {
     public Player() {
 
         //sets the position of the characters
-        position = new Vector2(1,4);
+        position = new Vector2(0,5);
 
         //sets the width of the tile
         width = 70;
@@ -26,9 +26,12 @@ public class Player {
         //sets the height of the tile
         height = 100;
 
+
+        //gets the spritesheet and determines the width and height of the unit
         spriteSheet = new SpriteSheet("img/aliens.png", width, height);
 
-        animation = spriteSheet.createAnimation();
+        //gives it the frames of animations and speed
+        animation = spriteSheet.createAnimation(9, 10, 0.25f);
 
         //initating the stateTime to 0
         stateTime = 0f;
@@ -45,7 +48,7 @@ public void draw(Batch spriteBatch){
 public void update(float deltaTime){
 
     //adds to the player position
-    position.y += deltaTime;
+    position.x += deltaTime;
 
     //adds to the time in stateTime
     stateTime += deltaTime;

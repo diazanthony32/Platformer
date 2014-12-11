@@ -10,7 +10,6 @@ public class SpriteSheet {
     public Texture spriteSheet;
     public TextureRegion[] spriteFrames;
 
-    public Animation animation;
 
     //takes in the path to the spriteSheet and takes the width and height
     public SpriteSheet(String pathToFile, int width, int height) {
@@ -57,20 +56,24 @@ public class SpriteSheet {
 
     }
 
-    public Animation createAnimation(){
+    public Animation createAnimation(int startFrame, int lastFrame, float animationSpeed){
+
+        //gets all the frames in between the start and the last frame
+        int counter = (lastFrame + 1) - startFrame;
 
         //creates space inside animation frames
-        TextureRegion[] animationFrames = new TextureRegion[2];
+        TextureRegion[] animationFrames = new TextureRegion[counter];
 
-        //gets the first part of the array and puts the first frame in
-        animationFrames[0] = spriteFrames[23];
-        //same as before
-        animationFrames[1] = spriteFrames[24];
+        //counting down to the last frame
+        for (int index = lastFrame; index >= startFrame;index--){
+
+            //
+            animationFrames[--counter] = spriteFrames[index];
+
+        }
 
         //amount of time the frame is played for
-        animation = new Animation(0.3f, animationFrames);
-
-        return animation;
+        return new Animation(animationSpeed, animationFrames);
 
     }
 }
