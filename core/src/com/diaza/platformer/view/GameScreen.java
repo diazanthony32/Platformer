@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.diaza.platformer.controller.Player;
 
 public class GameScreen implements Screen{
@@ -20,6 +23,9 @@ public class GameScreen implements Screen{
     public Batch spriteBatch;
     public Player player;
 
+    public static World gameWorld;
+    private Box2DDebugRenderer debugRenderer;
+
     public GameScreen() {
 
         //loads up the map from assets folder
@@ -27,6 +33,8 @@ public class GameScreen implements Screen{
 
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(map, 1/70f);
+        gameWorld = new World(new Vector2(0,-10), true);
+        debugRenderer = new Box2DDebugRenderer();
 
         //gets the width of the window
         float width = Gdx.graphics.getWidth();
@@ -74,6 +82,8 @@ public class GameScreen implements Screen{
         spriteBatch.begin();
         player.draw(spriteBatch);
         spriteBatch.end();
+
+        debugRenderer.render(gameWorld, camera.combined);
 
     }
 

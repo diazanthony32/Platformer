@@ -76,4 +76,24 @@ public class SpriteSheet {
         return new Animation(animationSpeed, animationFrames);
 
     }
+
+    public Animation flipAnimation(Animation originalAnimation, boolean flipX, boolean flipY){
+
+        int frameCount = originalAnimation.getKeyFrames().length;
+
+        TextureRegion[] flippedFrames = new TextureRegion[frameCount];
+
+        //
+        for (int index = 0;index <= frameCount - 1; index++){
+
+            //
+            flippedFrames[index] = new TextureRegion(originalAnimation.getKeyFrames()[index]);
+
+            flippedFrames[index].flip(flipX,flipY);
+
+        }
+
+        return new Animation(originalAnimation.getFrameDuration(), flippedFrames);
+    }
+
 }
