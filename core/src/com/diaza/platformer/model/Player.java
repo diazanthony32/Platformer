@@ -1,16 +1,15 @@
-package com.diaza.platformer.controller;
+package com.diaza.platformer.model;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.diaza.platformer.controller.LevelController;
 import com.diaza.platformer.view.GameScreen;
 
-import java.awt.Polygon;
 import java.util.HashMap;
 
 public class Player {
@@ -21,23 +20,23 @@ public class Player {
 
     public String currentAnimation;
 
-    public int width;
-    public int height;
+    public float width;
+    public float height;
 
     private HashMap<String, Animation> animations;
 
-    public Player() {
+    public Player(int width, int height) {
 
         //sets the position of the characters
-        position = new Vector2(0,5);
+        position = new Vector2(3,5);
 
         animations = new HashMap<String, Animation>();
 
         //sets the width of the tile
-        width = 70;
+        this.width = width * 1/70f;
 
         //sets the height of the tile
-        height = 100;
+        this.height = height * 1/70f;
 
 
         //gets the spritesheet and determines the width and height of the unit
@@ -77,7 +76,7 @@ public class Player {
         //initating the stateTime to 0
         stateTime = 0f;
 
-        currentAnimation = "swimLeft";
+        currentAnimation = "swimRight";
 
         //makes the body properties
         BodyDef bodyDefinition = new BodyDef();
@@ -89,13 +88,13 @@ public class Player {
         bodyDefinition.position.set(position);
 
         //attaches the body def to the body
-        Body playerBody = GameScreen.gameWorld.createBody(bodyDefinition);
+        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
         playerBody.setUserData(this);
 
         //creates the shape
         PolygonShape rectangleShape = new PolygonShape();
 
-        rectangleShape.setAsBox(width / 2f, height / 2f, new Vector2(width / 2f, height / 2f), 0f);
+        rectangleShape.setAsBox(this.width / 2f, this.height / 2f, new Vector2(this.width / 2f, this.height / 2f), 0f);
 
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
@@ -108,7 +107,7 @@ public class Player {
 public void draw(Batch spriteBatch){
 
     //plays the animation
-    spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime,true), position.x, position.y, width * (1/70f), height * (1/70f));
+    spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime,true), position.x, position.y, width, height);
 
 
 

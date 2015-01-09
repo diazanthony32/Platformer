@@ -1,4 +1,4 @@
-package com.diaza.platformer.controller;
+package com.diaza.platformer.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
