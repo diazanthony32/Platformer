@@ -1,6 +1,5 @@
 package com.diaza.platformer.model;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -8,40 +7,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.diaza.platformer.controller.LevelController;
-import com.diaza.platformer.view.GameScreen;
 
-import java.util.HashMap;
+public class Player extends Sprite{
 
-public class Player {
+    public Player(Vector2 position,int width, int height) {
 
-    public Vector2 position;
-    private float stateTime;
-    public SpriteSheet spriteSheet;
-
-    public String currentAnimation;
-
-    public float width;
-    public float height;
-
-    private HashMap<String, Animation> animations;
-
-    public Player(int width, int height) {
-
-        //sets the position of the characters
-        position = new Vector2(3,5);
-
-        animations = new HashMap<String, Animation>();
-
-        //sets the width of the tile
-        this.width = width * 1/70f;
-
-        //sets the height of the tile
-        this.height = height * 1/70f;
-
+        super(position,width,height);
 
         //gets the spritesheet and determines the width and height of the unit
         spriteSheet = new SpriteSheet("img/aliens.png", width, height);
-
 
         //Stand Animation
         animations.put("Stand", spriteSheet.createAnimation(21, 21, 0.25f));
@@ -73,11 +47,6 @@ public class Player {
         animations.put("walkRight", spriteSheet.createAnimation(31, 32, 0.25f));
         animations.put("walkLeft", spriteSheet.flipAnimation(animations.get("walkRight"),true,false));
 
-        //initating the stateTime to 0
-        stateTime = 0f;
-
-        currentAnimation = "swimRight";
-
         //makes the body properties
         BodyDef bodyDefinition = new BodyDef();
 
@@ -104,22 +73,16 @@ public class Player {
 
     }
 
-public void draw(Batch spriteBatch){
+    public void draw(Batch spriteBatch){
 
-    //plays the animation
-    spriteBatch.draw(animations.get(currentAnimation).getKeyFrame(stateTime,true), position.x, position.y, width, height);
+        super.draw(spriteBatch);
 
+    }
 
+    public void update(float deltaTime){
 
-}
+        super.update(deltaTime);
 
-public void update(float deltaTime){
-
-    //adds to the time in stateTime
-    stateTime += deltaTime;
-
-
-
-}
+    }
 
 }
