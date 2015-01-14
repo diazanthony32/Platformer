@@ -35,7 +35,7 @@ public class LevelController {
 
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        gameWorld = new World(new Vector2(0,-10), true);
+        gameWorld = new World(new Vector2(0,0), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
@@ -80,9 +80,9 @@ public class LevelController {
         for (Body body : worldBodies){
 
             //grabs the data from Player.java
-            Sprite playerBody = (Sprite)body.getUserData();
+            Sprite spriteBody = (Sprite)body.getUserData();
             //connects the position of the body(Sprite) to the box
-            playerBody.position = body.getPosition();
+            spriteBody.position = body.getPosition();
 
         }
 

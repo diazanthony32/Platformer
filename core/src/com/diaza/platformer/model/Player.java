@@ -53,12 +53,12 @@ public class Player extends Sprite{
         //sets the body to be able to be dynamic
         bodyDefinition.type = BodyDef.BodyType.DynamicBody;
 
-        //sets the postion of the player
+        //sets the position of the player
         bodyDefinition.position.set(position);
 
         //attaches the body def to the body
-        Body playerBody = LevelController.gameWorld.createBody(bodyDefinition);
-        playerBody.setUserData(this);
+        physicsBody = LevelController.gameWorld.createBody(bodyDefinition);
+        physicsBody.setUserData(this);
 
         //creates the shape
         PolygonShape rectangleShape = new PolygonShape();
@@ -68,7 +68,7 @@ public class Player extends Sprite{
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
 
-        playerBody.createFixture(fixtureDefinition);
+        physicsBody.createFixture(fixtureDefinition);
         rectangleShape.dispose();
 
     }
