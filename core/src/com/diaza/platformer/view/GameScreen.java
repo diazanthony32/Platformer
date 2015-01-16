@@ -3,18 +3,10 @@ package com.diaza.platformer.view;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.diaza.platformer.controller.CameraController;
+import com.diaza.platformer.controller.EnemyController;
 import com.diaza.platformer.controller.LevelController;
 import com.diaza.platformer.controller.PlayerController;
-import com.diaza.platformer.model.Player;
 
 public class GameScreen implements Screen{
 
@@ -25,6 +17,8 @@ public class GameScreen implements Screen{
         CameraController.initializeController();
 
         PlayerController.initializeController();
+
+        EnemyController.initializeController();
 
     }
 
@@ -44,6 +38,8 @@ public class GameScreen implements Screen{
         LevelController.update();
 
         PlayerController.update(delta);
+
+        EnemyController.update(delta);
 
         LevelController.draw();
     }

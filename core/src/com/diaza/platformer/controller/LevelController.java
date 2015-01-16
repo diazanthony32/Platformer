@@ -35,7 +35,7 @@ public class LevelController {
 
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        gameWorld = new World(new Vector2(0,0), true);
+        gameWorld = new World(new Vector2( 0, -9.8f), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
 
@@ -47,7 +47,11 @@ public class LevelController {
     public static void draw() {
 
         spriteBatch.begin();
+
         PlayerController.player.draw(spriteBatch);
+
+        EnemyController.enemy.draw(spriteBatch);
+
         spriteBatch.end();
 
         debugRenderer.render(gameWorld, CameraController.camera.combined);

@@ -23,7 +23,10 @@ public class Sprite {
 
     protected HashMap<String, Animation> animations;
 
-    public Sprite(Vector2 position,int width, int height) {
+    public Sprite(Vector2 position,int width, int height, String sheetPath) {
+
+        //gets the spritesheet and determines the width and height of the unit
+        spriteSheet = new SpriteSheet(sheetPath, width, height);
 
         //sets the position of the characters
         this.position = position;
@@ -38,8 +41,6 @@ public class Sprite {
 
         //initating the stateTime to 0
         stateTime = 0f;
-
-        currentAnimation = "swimRight";
 
     }
 

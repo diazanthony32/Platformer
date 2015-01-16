@@ -10,21 +10,18 @@ import com.diaza.platformer.controller.LevelController;
 
 public class Player extends Sprite{
 
-    public Player(Vector2 position,int width, int height) {
+    public Player(Vector2 position,int width, int height, String sheetPath) {
 
-        super(position,width,height);
-
-        //gets the spritesheet and determines the width and height of the unit
-        spriteSheet = new SpriteSheet("img/aliens.png", width, height);
+        super(position, width, height, sheetPath);
 
         //Stand Animation
-        animations.put("Stand", spriteSheet.createAnimation(21, 21, 0.25f));
+        animations.put("Stand", spriteSheet.createAnimation(22, 22, 0.25f));
 
         //Climbing Animation
-        animations.put("Climb", spriteSheet.createAnimation(22, 23, 0.25f));
+        animations.put("Climb", spriteSheet.createAnimation(23, 24, 0.25f));
 
         //Damage Animations
-        animations.put("damageRight", spriteSheet.createAnimation(24, 25, 0.25f));
+        animations.put("damageRight", spriteSheet.createAnimation(25, 25, 0.25f));
         animations.put("damageLeft", spriteSheet.flipAnimation(animations.get("damageRight"),true,false));
 
         //Damage Animations
@@ -70,6 +67,9 @@ public class Player extends Sprite{
 
         physicsBody.createFixture(fixtureDefinition);
         rectangleShape.dispose();
+
+
+        currentAnimation = "walkRight";
 
     }
 
