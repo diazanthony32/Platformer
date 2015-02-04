@@ -21,12 +21,12 @@ public class Player extends Sprite{
         animations.put("Climb", spriteSheet.createAnimation(23, 24, 0.25f));
 
         //Damage Animations
-        animations.put("damageRight", spriteSheet.createAnimation(25, 25, 0.25f));
-        animations.put("damageLeft", spriteSheet.flipAnimation(animations.get("damageRight"),true,false));
+        animations.put("duckRight", spriteSheet.createAnimation(25, 25, 0.25f));
+        animations.put("duckLeft", spriteSheet.flipAnimation(animations.get("duckRight"),true,false));
 
         //Damage Animations
-        animations.put("landRight", spriteSheet.createAnimation(26, 26, 0.25f));
-        animations.put("landLeft", spriteSheet.flipAnimation(animations.get("landRight"),true,false));
+        animations.put("damageRight", spriteSheet.createAnimation(26, 26, 0.25f));
+        animations.put("damageLeft", spriteSheet.flipAnimation(animations.get("damageRight"),true,false));
 
         //Jump Animations
         animations.put("jumpRight", spriteSheet.createAnimation(27, 27, 0.25f));
@@ -57,17 +57,29 @@ public class Player extends Sprite{
         physicsBody = LevelController.gameWorld.createBody(bodyDefinition);
         physicsBody.setUserData(this);
 
+        physicsBody.setFixedRotation(true);
+
         //creates the shape
         PolygonShape rectangleShape = new PolygonShape();
 
         rectangleShape.setAsBox(this.width / 2f, this.height / 2f, new Vector2(this.width / 2f, this.height / 2f), 0f);
 
+        PolygonShape sensorShape = new PolygonShape();
+        sensorShape.setAsBox(this.width/3, this.height/32, new Vector2(this.width/2, 0f), 0f);
+
         FixtureDef fixtureDefinition = new FixtureDef();
         fixtureDefinition.shape = rectangleShape;
 
-        physicsBody.createFixture(fixtureDefinition);
-        rectangleShape.dispose();
+        FixtureDef fixtureDefinitionSensor = new FixtureDef();
+        fixtureDefinitionSensor.shape = sensorShape;
 
+        fixtureDefinitionSensor.isSensor = true;
+
+        physicsBody.createFixture(fixtureDefinition);
+        physicsBody.createFixture(fixtureDefinitionSensor);
+
+        rectangleShape.dispose();
+        sensorShape.dispose();
 
         currentAnimation = "walkRight";
 

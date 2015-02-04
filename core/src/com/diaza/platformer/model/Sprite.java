@@ -21,6 +21,8 @@ public class Sprite {
     public float width;
     public float height;
 
+    public String direction;
+
     protected HashMap<String, Animation> animations;
 
     public Sprite(Vector2 position,int width, int height, String sheetPath) {
@@ -41,6 +43,8 @@ public class Sprite {
 
         //initating the stateTime to 0
         stateTime = 0f;
+
+        direction = "right";
 
     }
 

@@ -1,16 +1,18 @@
 package com.diaza.platformer.controller;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.diaza.platformer.model.Blocks;
+import com.diaza.platformer.model.Bodies;
+import com.diaza.platformer.model.CollisionListener;
 import com.diaza.platformer.model.Level;
-import com.diaza.platformer.model.Player;
 import com.diaza.platformer.model.Sprite;
 
 public class LevelController {
@@ -35,16 +37,22 @@ public class LevelController {
 
         //renders the map (1/70 is the unit to pixel size)
         renderer = new OrthogonalTiledMapRenderer(level.map, UNIT_SCALE);
-        gameWorld = new World(new Vector2( 0, -9.8f), true);
+        gameWorld = new World(new Vector2( 0, -10f), true);
         worldBodies = new Array<Body>();
         debugRenderer = new Box2DDebugRenderer();
+
+        gameWorld.setContactListener(new CollisionListener());
 
         //creates a new batch of sprites
         spriteBatch = renderer.getSpriteBatch();
 
+        createLevelBodies();
+
     }
 
     public static void draw() {
+
+        spriteBatch.setProjectionMatrix(CameraController.camera.combined);
 
         spriteBatch.begin();
 
@@ -53,6 +61,10 @@ public class LevelController {
         EnemyController.enemy.draw(spriteBatch);
 
         spriteBatch.end();
+
+        spriteBatch.setProjectionMatrix(CameraController.inputCamera.combined);
+
+        InputController.draw(spriteBatch);
 
         debugRenderer.render(gameWorld, CameraController.camera.combined);
 
@@ -85,8 +97,30 @@ public class LevelController {
 
             //grabs the data from Player.java
             Sprite spriteBody = (Sprite)body.getUserData();
-            //connects the position of the body(Sprite) to the box
-            spriteBody.position = body.getPosition();
+
+            if (spriteBody != null){
+                spriteBody.position = body.getPosition();
+            }
+
+        }
+
+    }
+
+    private static void createLevelBodies() {
+
+        MapObjects mapObjects = level.getMapObjects(level.getMapLayer("collision"));
+
+        for (MapObject mapObject : mapObjects) {
+
+            Bodies.createBody(mapObject);
+
+        }
+
+        MapObjects dynamicMapObjects = level.getMapObjects(level.getMapLayer("blocks"));
+
+        for (MapObject mapObject : dynamicMapObjects) {
+
+            Bodies.createBody(mapObject);
 
         }
 

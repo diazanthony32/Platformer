@@ -6,17 +6,14 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.diaza.platformer.controller.LevelController;
 
-public class Enemy extends Sprite{
+public class Blocks extends Sprite{
 
-    public Enemy(Vector2 position,int width, int height, String sheetPath) {
+    public Blocks(Vector2 position,int width, int height, String sheetPath) {
 
         super(position, width, height, sheetPath);
 
         //Stand Animation
         animations.put("Idle", spriteSheet.createAnimation(0, 1, 0.25f));
-
-        //Damage Animations
-        animations.put("Damage", spriteSheet.createAnimation(2, 3, 0.05f));
 
         //makes the body properties
         BodyDef bodyDefinition = new BodyDef();
