@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.diaza.platformer.controller.PlayerController;
 
 public class CollisionListener implements ContactListener {
 
@@ -14,12 +15,31 @@ public class CollisionListener implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
+        boolean sensorA = fixtureA.isSensor();
+        boolean sensorB = fixtureB.isSensor();
+
+        if (sensorA || sensorB){
+
+            PlayerController.grounded = true;
+
+        }
+
     }
 
     @Override
     public void endContact(Contact contact) {
 
-        System.out.println("End Contact");
+        Fixture fixtureA = contact.getFixtureA();
+        Fixture fixtureB = contact.getFixtureB();
+
+        boolean sensorA = fixtureA.isSensor();
+        boolean sensorB = fixtureB.isSensor();
+
+        if (sensorA || sensorB){
+
+            PlayerController.grounded = false;
+
+        }
 
     }
 

@@ -13,11 +13,13 @@ public class PlayerController {
 
     private static final float MAX_VELOCITY = 4f;
 
-    private static final float JUMP_VELOCITY = 9f;
+    private static final float JUMP_VELOCITY = 8f;
 
     public static String specialAction;
 
     public static String movementAction;
+
+    public static boolean grounded;
 
     private enum State{
 
@@ -88,9 +90,11 @@ public class PlayerController {
 
         }
 
-        if (movementAction.equalsIgnoreCase("jump")) {
+        if (movementAction.equalsIgnoreCase("jump") && grounded) {
 
-            player.physicsBody.applyLinearImpulse( 0f, VELOCITY, position.x, position.y, true);
+            player.physicsBody.applyLinearImpulse( 0f, JUMP_VELOCITY, position.x, position.y, true);
+
+            grounded = false;
 
         }
 
