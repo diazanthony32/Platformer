@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.diaza.platformer.controller.CameraController;
 import com.diaza.platformer.controller.EnemyController;
 import com.diaza.platformer.controller.LevelController;
+import com.diaza.platformer.controller.MusicController;
 import com.diaza.platformer.controller.PlayerController;
 import com.diaza.platformer.controller.InputController;
 
 public class GameScreen implements Screen{
 
     public GameScreen() {
+
+        MusicController.initializeMusicController();
 
         LevelController.initializeController();
 

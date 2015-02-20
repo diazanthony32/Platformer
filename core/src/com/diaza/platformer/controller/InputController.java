@@ -128,11 +128,11 @@ public class InputController {
 
                         }
 
-                        if (inputControl.action.equalsIgnoreCase("up")){
+                        //if (inputControl.action.equalsIgnoreCase("up")){
 
-                            PlayerController.movementAction = "climb";
+                          //  PlayerController.movementAction = "climb";
 
-                        }
+                        //}
 
                         if (inputControl.action.equalsIgnoreCase("down")){
 
@@ -224,11 +224,11 @@ public class InputController {
 
                 }
 
-                if(keycode == Input.Keys.UP){
+  //              if(keycode == Input.Keys.UP){
 
-                    PlayerController.movementAction = "climb";
+//                    PlayerController.movementAction = "climb";
 
-                }
+//                }
 
                 return true;
 
@@ -261,11 +261,11 @@ public class InputController {
 
                 }
 
-                if(keycode == Input.Keys.UP){
+        //        if(keycode == Input.Keys.UP){
 
-                    PlayerController.movementAction = "";
+      //              PlayerController.movementAction = "";
 
-                }
+    //            }
 
                 return true;
 

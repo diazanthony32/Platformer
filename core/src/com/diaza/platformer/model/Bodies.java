@@ -1,7 +1,6 @@
 package com.diaza.platformer.model;
 
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Vector2;
@@ -97,8 +96,13 @@ public class Bodies {
             bodyDefinition.position.set(rectangleObject.getRectangle().x * LevelController.UNIT_SCALE,
                     rectangleObject.getRectangle().y * LevelController.UNIT_SCALE);
 
+            Blocks blocks = new Blocks(bodyDefinition.position,70,70,"img/background-tiles.png");
+
+            LevelController.worldSprites.add(blocks);
 
             Body physicsBody = LevelController.gameWorld.createBody(bodyDefinition);
+
+            physicsBody.setUserData(blocks);
 
             PolygonShape rectangleShape = new PolygonShape();
 

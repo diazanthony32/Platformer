@@ -13,7 +13,7 @@ public class PlayerController {
 
     private static final float MAX_VELOCITY = 4f;
 
-    private static final float JUMP_VELOCITY = 8f;
+    private static final float JUMP_VELOCITY = 7f;
 
     public static String specialAction;
 
@@ -66,7 +66,7 @@ public class PlayerController {
 
         }
 
-        if (Math.abs(velocity.y) > JUMP_VELOCITY){
+        else if (Math.abs(velocity.y) > JUMP_VELOCITY){
 
             velocity.y = Math.signum(velocity.y) * JUMP_VELOCITY;
 
@@ -82,7 +82,7 @@ public class PlayerController {
 
         }
 
-        if (movementAction.equalsIgnoreCase("right")){
+        else if (movementAction.equalsIgnoreCase("right")){
 
             player.physicsBody.applyLinearImpulse(VELOCITY, 0f, position.x, position.y, true);
 
@@ -90,27 +90,23 @@ public class PlayerController {
 
         }
 
-        if (movementAction.equalsIgnoreCase("jump") && grounded) {
+        else if (movementAction.equalsIgnoreCase("jump") && grounded) {
 
             player.physicsBody.applyLinearImpulse( 0f, JUMP_VELOCITY, position.x, position.y, true);
 
             grounded = false;
 
+            MusicController.play("jump");
+
         }
 
-        if (movementAction.equalsIgnoreCase("climb")) {
+        else if (movementAction.equalsIgnoreCase("climb")) {
 
             player.physicsBody.applyLinearImpulse( 0f, VELOCITY /2, position.x, position.y, true);
 
         }
 
-        if (Math.abs(velocity.y) > 0.05){
-
-            playerState = State.Jump;
-
-        }
-
-        else if (Math.abs(velocity.x)>0){
+        if (PlayerController.movementAction == "left" && grounded || PlayerController.movementAction == "right" && grounded){
 
             playerState = State.Walk;
 
@@ -122,11 +118,11 @@ public class PlayerController {
 
         }
 
-        else if (PlayerController.movementAction == "climb"){
+        //else if (PlayerController.movementAction == "climb"){
 
-            playerState = State.Climb;
+          //  playerState = State.Climb;
 
-        }
+        //}
 
         else {
 
@@ -173,7 +169,7 @@ public class PlayerController {
 
         }
 
-        else if (playerState == State.Jump){
+        else if (!grounded){
 
             player.currentAnimation = "jumpRight";
 
@@ -207,7 +203,7 @@ public class PlayerController {
 
         }
 
-        else if (playerState == State.Jump){
+        else if (!grounded){
 
             player.currentAnimation = "jumpLeft";
 

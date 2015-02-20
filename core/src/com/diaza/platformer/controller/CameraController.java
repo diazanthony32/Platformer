@@ -2,6 +2,11 @@ package com.diaza.platformer.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import com.diaza.platformer.model.Level;
+import com.diaza.platformer.model.Player;
 
 public class CameraController {
 
@@ -35,7 +40,11 @@ public class CameraController {
 
     public static void update() {
 
-        camera.position.set(PlayerController.player.position.x, PlayerController.player.position.y, 0f);
+        float positionX = MathUtils.clamp( PlayerController.player.position.x, inputCamera.viewportWidth /2f, 80f);
+
+        float positionY = MathUtils.clamp(PlayerController.player.position.y, inputCamera.viewportHeight /2f, 20f);
+
+        camera.position.set(positionX, positionY, 0f);
 
         //when camera position changes it updates
         camera.update();
