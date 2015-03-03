@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.diaza.platformer.controller.CameraController;
 import com.diaza.platformer.controller.LevelController;
-import com.diaza.platformer.model.SpriteSheet;
 
 public class InputControl {
 

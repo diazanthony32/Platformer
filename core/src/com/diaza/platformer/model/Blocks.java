@@ -10,7 +10,7 @@ public class Blocks extends Sprite{
         super(position, width, height, sheetPath);
 
         //Stand Animation
-        animations.put("idle", spriteSheet.createAnimation(1, 1, 0.25f));
+        animations.put("idle", spriteSheet.createAnimation(0, 1, 0.25f));
 
         currentAnimation = "idle";
 

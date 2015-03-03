@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.diaza.platformer.model.Blocks;
 import com.diaza.platformer.model.Bodies;
 import com.diaza.platformer.model.CollisionListener;
 import com.diaza.platformer.model.Level;
@@ -109,7 +111,9 @@ public class LevelController {
             Sprite spriteBody = (Sprite)body.getUserData();
 
             if (spriteBody != null){
+
                 spriteBody.position = body.getPosition();
+
             }
 
         }
@@ -131,7 +135,6 @@ public class LevelController {
         for (MapObject mapObject : dynamicMapObjects) {
 
             Bodies.createBody(mapObject);
-
 
         }
 

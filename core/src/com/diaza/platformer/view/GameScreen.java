@@ -9,6 +9,8 @@ import com.diaza.platformer.controller.LevelController;
 import com.diaza.platformer.controller.MusicController;
 import com.diaza.platformer.controller.PlayerController;
 import com.diaza.platformer.controller.InputController;
+import com.diaza.platformer.model.CollisionListener;
+import com.diaza.platformer.model.Player;
 
 public class GameScreen implements Screen{
 
